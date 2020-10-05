@@ -2,6 +2,8 @@
 
 using namespace std;
 
+//максимальное количество домов, которые можно купить на определенную сумму
+
 void quicksort(int* mas, int first, int last)
 {
 	int mid;
