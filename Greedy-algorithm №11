@@ -1,0 +1,59 @@
+#include <iostream>
+
+using namespace std;
+
+void quicksort(int* mas, int first, int last)
+{
+	int mid;
+	int count;
+	int f = first, l = last;
+	mid = mas[(f + l) / 2];
+	do
+	{
+		while (mas[f] < mid) f++;
+		while (mas[l] > mid) l--;
+		if (f <= l) //перестановка элементов
+		{
+			count = mas[f];
+			mas[f] = mas[l];
+			mas[l] = count;
+
+
+			f++;
+			l--;
+		}
+	} while (f < l);
+	if (first < l) quicksort(mas, first, l);
+	if (f < last) quicksort(mas, f, last);
+}
+
+int main() {
+
+	int houses;
+	cin >> houses;
+	int money;
+	cin >> money;
+	int* dom = new int[houses];
+
+	for (int i = 0; i < houses; i++) {
+		cin >> dom[i];
+	}
+
+	quicksort(dom, 0, houses - 1);
+
+	int buy = 0;
+
+	for (int i = 0; i < houses; i++) {
+		if (dom[i] > money) {
+			continue;
+		}
+		else {
+			buy++;
+			money = money - dom[i];
+		}
+	}
+
+	cout << buy;
+
+	return 0;
+}
