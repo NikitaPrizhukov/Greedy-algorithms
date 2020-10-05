@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+//максимальное колличество фотографий и их копий в датацентрах,
+//при учете того что на одном датацентре может хранится одна фотография одно вида
+
+bool comp(int first, int next) {
+	return next < first;
+}
+
+int savePhotografy(vector<int> memory, int& data, int& count) {
+
+	if (data < 2) {
+		return 0;
+	}
+
+	while (1) {
+
+		int max = -10000;
+		int index;
+		int index2;
+
+		for (int i = 0; i < data; i++) {
+			if (memory[i] > max) {
+				max = memory[i];
+				index = i;
+			}
+		}
+
+		if (max == 0) break;
+
+		memory[index]--;
+		max = -10000;
+
+		for (int i = 0; i < data; i++) {
+			if (memory[i] > max && i != index) {
+				max = memory[i];
+				index2 = i;
+			}
+		}
+
+		if (max == 0) break;
+
+		memory[index2]--;
+		count++;
+	}
+	return count;
+}
+
+
+
+int main() {
+
+	string text;
+	int data;
+	cin >> data;
+
+	vector<int> memory;
+
+	int newPhoto = 0;
+	int count = 0;
+	int numberData = 0;
+
+	for (int i = 0; i < data; i++) {
+		int c;
+		cin >> c;
+		memory.push_back(c);
+	}
+
+	cout << savePhotografy(memory, data, count);
+
+	return 0;
+}
