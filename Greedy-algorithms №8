@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+//длинна наибольшего возрастающего подмассива 
+
+int main() {
+
+	int a = 0;
+	cin >> a;
+
+	int max = 0;
+	int first = 0;
+	int second = 0;
+	cin >> first;
+	int count = 1;
+
+	for (int i = 1; i < a; i++) {
+		cin >> second;
+		if (first < second) {
+			count++;
+			first = second;
+		}
+		else {
+			if (max < count) {
+				max = count;
+			}
+			count = 1;
+			first = second;
+		}
+	}
+
+	cout << max;
+	return 0;
+}
