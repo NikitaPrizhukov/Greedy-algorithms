@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+//максимальное количество детей которых можно накормить печеньем
+
+int main() {
+	int child;
+	cin >> child;
+	vector<int>people;
+	int a = 0;
+
+	for (int i = 0; i < child; i++) {
+		cin >> a;
+		people.push_back(a);
+	}
+
+	int cockis;
+	cin >> cockis;
+
+	vector<int>nam;
+	a = 0;
+
+	for (int i = 0; i < cockis; i++) {
+		cin >> a;
+		nam.push_back(a);
+	}
+
+	sort(people.begin(), people.end());
+	sort(nam.begin(), nam.end());
+
+	int count = 0;
+	int nom = 0;
+
+	for (int i = 0; i < child; i++) {
+		for (int f = nom; f < cockis; f++) {
+			if (people[i] - nam[f] <= 0) {
+				count++;
+				nom = f + 1;
+				break;
+			}
+		}
+	}
+
+	cout << count;
+
+	return 0;
+}
