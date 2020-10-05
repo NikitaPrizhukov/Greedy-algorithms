@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//удалить минимальное количество символов из каждой строки, что бы каждая строка стала лексикографически отсортированной
+
+int main() {
+	int col = 0;
+	cin >> col;
+	int bukvi;
+	cin >> bukvi;
+
+	string* str = new string[col];
+	for (int i = 0; i < col; i++) {
+		cin >> str[i];
+	}
+
+	string in;
+	int b, c;
+
+	int count = 0;
+	for (int i = 0; i < bukvi; i++) {
+		in = str[0];
+		for (int f = 1; f < col; f++) {
+			b = (int)(in[i]);
+			c = (int)(str[f][i]);
+			if (b > c) {
+				count++;
+				break;
+			}
+			in = str[f];
+		}
+	}
+
+	cout << count;
+
+	return 0;
+}
