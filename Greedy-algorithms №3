@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//является ли первоя строка, подпоследовательностью второй
+
+int main() {
+
+	string first;
+	getline(cin, first);
+	string second;
+	getline(cin, second);
+	int count = 0;
+	int a = 0;
+
+	for (int i = 0; i < first.length(); i++) {
+		for (int f = count; f < second.length(); f++) {
+			if (second[f] == first[i]) {
+				count = f + 1;
+				a = 1;
+				break;
+			}
+		}
+		if (a == 1) { a = 0; }
+		else { cout << "False"; return 0; }
+	}
+	cout << "True";
+	return 0;
+}
