@@ -1,0 +1,78 @@
+#include <iostream>
+
+using namespace std;
+
+//вывести индекс искомого числа в сломаном массиве
+
+int findMax(int* mas, int& lenMas) {
+	int left = -1;
+	int right = lenMas;
+	while (left < right - 1) {
+		int m = (right + left) / 2;
+		if (mas[m] > mas[lenMas - 1]) {
+			left = m;
+		}
+		else {
+			right = m;
+		}
+	}
+	return left;
+}
+
+int findKey(int* mas, int& lenMas, int& key, int& leftMax) {
+
+	if (lenMas == 1) {
+		if (mas[0] == key) return 0;
+		return -1;
+	}
+
+	int left;
+	int right;
+	int indexKey = -1;
+	if (key > mas[0] && leftMax != -1) {
+		left = -1;
+		right = leftMax;
+	}
+	else if (key < mas[lenMas - 1] || leftMax == -1) {
+		left = leftMax;
+		right = lenMas;
+	}
+
+	while (left < right - 1) {
+
+		int m = (left + right) / 2;
+		if (mas[m] > key) {
+			right = m;
+		}
+		else if (mas[m] < key) {
+			left = m;
+		}
+		else {
+			indexKey = m;
+			return indexKey;
+		}
+	}
+	return indexKey;
+}
+
+int main() {
+
+	int lenMas;
+	cin >> lenMas;
+
+	int key;
+	cin >> key;
+
+	int* mas = new int[lenMas];
+
+	for (int i = 0; i < lenMas; i++) {
+		cin >> mas[i];
+	}
+
+	int indexMax = findMax(mas, lenMas);
+	cout << findKey(mas, lenMas, key, indexMax);
+
+	delete mas;
+
+	return 0;
+}
